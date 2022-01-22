@@ -1,0 +1,33 @@
+﻿<Window x:Class="WpfAppClient.AddCard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppClient"
+        mc:Ignorable="d"
+        Title="Добавить карточку" Height="450" Width="800">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" FontSize="15">
+            <MenuItem Header="_Открыть картинку" Click="MenuItem_Click_Open" />
+            <MenuItem Header="_Сохранить" Click="MenuItem_Click_Save" />
+        </Menu>
+
+        <StatusBar DockPanel.Dock="Bottom" >
+            <TextBlock>Время:</TextBlock>
+            <TextBlock x:Name="textblockTime" TextAlignment="Right"/>
+        </StatusBar>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="47*"/>
+                <ColumnDefinition Width="745*"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="currentImage"                
+                   Stretch="Fill" Margin="155,30,161,110" Grid.Column="1"
+                           />
+            <Label Content="Введите Название товара" HorizontalAlignment="Left" Margin="295,297,0,0" VerticalAlignment="Top" Width="155" Grid.Column="1"/>
+            <TextBox x:Name="inputNameProduct" HorizontalAlignment="Left" Height="23" Margin="193,337,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="356" Grid.Column="1"/>
+        </Grid>
+
+    </DockPanel>
+</Window>
