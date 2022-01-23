@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplicationAPI.Model;
@@ -18,14 +18,14 @@ namespace WebApplicationAPI.Controllers
         {
             this.db = dB;
         }
-      
+
         [HttpGet("all")]
-        public IEnumerable<ProductCart> GeTasks()
+        public async Task<IEnumerable> GeTasks()
         {
-            return db.Cards;
+            return await db.Cards.ToArrayAsync();
         }
 
-        
+
         [HttpGet("product")]
         public async Task<IActionResult> GetProduct(string nameProduct)
         {
@@ -45,7 +45,7 @@ namespace WebApplicationAPI.Controllers
                                                                Img = item.Img
                                                            };
 
-                var cardProduct = await cardProductQuery.FirstOrDefaultAsync();
+                var cardProduct = await cardProductQuery.ToListAsync();
 
                 if (cardProduct == null)
                 {
@@ -71,20 +71,13 @@ namespace WebApplicationAPI.Controllers
         }
 
         [HttpPut("edit/{id}")]
-        public async Task<ActionResult> ApdateCardProduct(int id,[FromBody] ProductCart productCartDto)
+        public async Task<ActionResult> ApdateCardProduct(int id, [FromBody] ProductCart value)
         {
 
-            if (id == productCartDto.Id)
+            if (id == value.Id)
             {
-                var productCart = new ProductCart
-                {
-                    Id = productCartDto.Id,
-                    Img = productCartDto.Img,
-                    NameProduct = productCartDto.NameProduct
-                };
 
-                db.Entry(productCart).State = EntityState.Modified;
-
+                db.Entry(value).State = EntityState.Modified;
                 await db.SaveChangesAsync();
             }
 

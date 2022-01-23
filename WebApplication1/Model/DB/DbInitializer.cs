@@ -31,7 +31,7 @@ namespace WebApplicationAPI.Model.DB
                      });
             }
           
-            card.SaveChanges();
+           await card.SaveChangesAsync();
         }
     }
 }
