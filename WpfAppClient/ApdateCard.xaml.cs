@@ -58,10 +58,10 @@ namespace WpfAppClient
             }
         }
 
-        private void MenuItem_Click_SaveApdate(object sender, RoutedEventArgs e)
+        private async void  MenuItem_Click_SaveApdate(object sender, RoutedEventArgs e)
         {
             
-            UpdateProductAsync(ActionsApi.SetProductCart(productCarts[i], currentImage.Source, inputNameProduct.Text));
+            await UpdateProductAsync(ActionsApi.SetProductCart(productCarts[i], currentImage.Source, inputNameProduct.Text));
 
             this.Close();
         }
@@ -69,7 +69,7 @@ namespace WpfAppClient
         static async Task<ProductCart> UpdateProductAsync(ProductCart product)
         {
             HttpResponseMessage response = await client.PutAsJsonAsync(
-                $"/api/Values/edit/{product.Id}", product);
+                $"https://localhost:44304/api/Values/edit/{product.Id}", product);
             response.EnsureSuccessStatusCode();
            
             product = await response.Content.ReadAsAsync<ProductCart>();

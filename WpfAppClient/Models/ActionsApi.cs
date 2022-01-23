@@ -47,7 +47,7 @@ namespace WpfAppClient.Models
           
             if (naneProduct != null)
             {
-                
+
 
                 try
                 {
@@ -70,9 +70,9 @@ namespace WpfAppClient.Models
 
                     return null;
                 }
-              
 
-               
+
+
             }
             else
             {
